@@ -17,16 +17,19 @@ switch (FEAT_TRAINS, SELF, mu3to12car, (num_vehs_in_consist < 9) || (num_vehs_in
 
 //关于长度定义
 switch (FEAT_TRAINS, SELF, switch_length_2_5_2, position_in_articulated_veh % 3) {
-    1: return 5;
-    return 2;
+    0: return 2;
+    1: return 8;
+    2: return 1;
 }
 switch (FEAT_TRAINS, SELF, switch_length_2_7_2, position_in_articulated_veh % 3) {
-    1: return 7;
-    return 2;
+    0: return 2;
+    1: return 8;
+    2: return 3;
 }
 switch (FEAT_TRAINS, SELF, switch_length_2_8_2, position_in_articulated_veh % 3) {
+    0: return 2;
     1: return 8;
-    return 2;
+    2: return 4;
 }
 
 //id对应下边可以搭载的车厢
