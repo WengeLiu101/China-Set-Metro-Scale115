@@ -1,27 +1,34 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_cab8d0dd_230_3, position_in_articulated_veh % 3) {
+    0: return 77;
+    1: return 77;
+    2: return 76;
+}
+
 //3号线
 
 
 spriteset (spriteset_chengdu3_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("chengdu_metro", "chengdu3-c")
+    template_purchase_c9 ("chengdu_metro", "chengdu3-c")
 }
 // Vehicle
 spriteset (spriteset_chengdu3_c_front, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-c")
+    template_std_c9 ("chengdu_metro", "chengdu3-c")
 }
 spriteset (spriteset_chengdu3_p, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-p")
+    template_std_c9 ("chengdu_metro", "chengdu3-p")
 }
 spriteset (spriteset_chengdu3_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-m")
+    template_std_c9 ("chengdu_metro", "chengdu3-m")
 }
 spriteset (spriteset_chengdu3_mr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-mr")
+    template_std_c9 ("chengdu_metro", "chengdu3-mr")
 }
 spriteset (spriteset_chengdu3_pr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-pr")
+    template_std_c9 ("chengdu_metro", "chengdu3-pr")
 }
 spriteset (spriteset_chengdu3_cab, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu3-cr")
+    template_std_c9 ("chengdu_metro", "chengdu3-cr")
 }
 switch (FEAT_TRAINS, SELF, switch_chengdu3_articulated_part, extra_callback_info1) {
     1..2: return chengdu3;
@@ -161,6 +168,7 @@ item (FEAT_TRAINS, chengdu3) {
         can_attach_wagon:               AB;
         start_stop:                     mu3to12car;
         // Graphics
+        visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, ENABLE_WAGON_POWER);
         default:                        switch_chengdu3_graphics_front;
         purchase:                       spriteset_chengdu3_original;
         articulated_part:               switch_chengdu3_articulated_part;
@@ -173,7 +181,7 @@ item (FEAT_TRAINS, chengdu3) {
         speed:                          80;
         tractive_effort_coefficient:    return 0;
         purchase_tractive_effort_coefficient: return int(0.131*255);
-        purchase_cargo_capacity:        230/3;
+        purchase_cargo_capacity: switch_pcap_cab8d0dd_230_3;
         cargo_age_period:               128;
         cost_factor:                    20;
         purchase_running_cost_factor:   17;

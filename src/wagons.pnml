@@ -1,24 +1,31 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_fa4dfbb0_280_3, position_in_articulated_veh % 3) {
+    0: return 94;
+    1: return 93;
+    2: return 93;
+}
+
 //begin chengdu_car
 
 spriteset (spriteset_chengdu_car_purchase_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("chengdu_metro", "chengdu2-m")
+    template_purchase_c9 ("chengdu_metro", "chengdu2-m")
 }
 spriteset (spriteset_3rd_car_purchase_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("beijing_subway", "beijing1-m")
+    template_purchase_c9 ("beijing_subway", "beijing1-m")
 }
 spriteset (spriteset_1st_car_purchase_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("guangzhou_metro", "guangzhou-d1-m")
+    template_purchase_c12 ("guangzhou_metro", "guangzhou-d1-m")
 }
 
 
 spriteset (spriteset_chengdu_car_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu2-m")
+    template_std_c9 ("chengdu_metro", "chengdu2-m")
 }
 spriteset (spriteset_3rd_car_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("beijing_subway", "beijing1-m")
+    template_std_c9 ("beijing_subway", "beijing1-m")
 }
 spriteset (spriteset_1st_car_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-d1-m")
+    template_std_c12 ("guangzhou_metro", "guangzhou-d1-m")
 }
 
 
@@ -106,7 +113,7 @@ item (FEAT_TRAINS,metro_car_elec) {
         cost_factor:                    50;
         running_cost_factor:            3 * runningcostfactor() * cafecostfactor() + accostfactor();
         purchase_running_cost_factor:   10;
-        purchase_cargo_capacity:        280/3;
+        purchase_cargo_capacity: switch_pcap_fa4dfbb0_280_3;
         visual_effect_and_powered:      return 0;
 
     }
@@ -163,7 +170,7 @@ item (FEAT_TRAINS,metro_1st_car_elec) {
         cost_factor:                    50;
         running_cost_factor:            3 * runningcostfactor() * cafecostfactor() + accostfactor();
         purchase_running_cost_factor:   10;
-        purchase_cargo_capacity:        280/3;
+        purchase_cargo_capacity: switch_pcap_fa4dfbb0_280_3;
         visual_effect_and_powered:      return 0;
 
     }
@@ -220,7 +227,7 @@ item (FEAT_TRAINS,metro_car_3rd) {
         cost_factor:                    50;
         running_cost_factor:            3 * runningcostfactor() * cafecostfactor() + accostfactor();
         purchase_running_cost_factor:   30;
-        purchase_cargo_capacity:        280/3;
+        purchase_cargo_capacity: switch_pcap_fa4dfbb0_280_3;
         visual_effect_and_powered:      return 0;
 
     }

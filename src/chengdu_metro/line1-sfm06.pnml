@@ -1,3 +1,10 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_e6187c8c_230_3, position_in_articulated_veh % 3) {
+    0: return 77;
+    1: return 77;
+    2: return 76;
+}
+
 //1号线
 //折叠列表
 switch (FEAT_TRAINS, SELF, switch_chengdu_name, getbits(extra_callback_info1, 0, 8) == 0x20? getbits(extra_callback_info1, 8, 8) : 0xFFFF) {
@@ -6,23 +13,23 @@ switch (FEAT_TRAINS, SELF, switch_chengdu_name, getbits(extra_callback_info1, 0,
 }
 
 spriteset (spriteset_chengdu1_smf06_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("chengdu_metro", "chengdu1-c")
+    template_purchase_c9 ("chengdu_metro", "chengdu1-c")
 }
 // Vehicle
 spriteset (spriteset_chengdu1_smf06_c_front, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu1-c")
+    template_std_c9 ("chengdu_metro", "chengdu1-c")
 }
 spriteset (spriteset_chengdu1_smf06_p, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu1-p")
+    template_std_c9 ("chengdu_metro", "chengdu1-p")
 }
 spriteset (spriteset_chengdu1_smf06_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu1-m")
+    template_std_c9 ("chengdu_metro", "chengdu1-m")
 }
 spriteset (spriteset_chengdu1_smf06_pr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu1-pr")
+    template_std_c9 ("chengdu_metro", "chengdu1-pr")
 }
 spriteset (spriteset_chengdu1_smf06_cab, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu1-cr")
+    template_std_c9 ("chengdu_metro", "chengdu1-cr")
 }
 switch (FEAT_TRAINS, SELF, switch_chengdu1_smf06_articulated_part, extra_callback_info1) {
     1..2: return chengdu1_sfm06;
@@ -130,6 +137,7 @@ item (FEAT_TRAINS, chengdu1_sfm06) {
         can_attach_wagon:               AB;
         start_stop:                     mu3to12car;
         // Graphics
+        visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, ENABLE_WAGON_POWER);
         default:                        switch_sfm06_graphics_front;
         purchase:                       spriteset_chengdu1_smf06_original;
         articulated_part:               switch_chengdu1_smf06_articulated_part;
@@ -141,7 +149,7 @@ item (FEAT_TRAINS, chengdu1_sfm06) {
         speed:                          80;
         tractive_effort_coefficient:    return 0;
         purchase_tractive_effort_coefficient: return int(0.111*255);
-        purchase_cargo_capacity:        230/3;
+        purchase_cargo_capacity: switch_pcap_e6187c8c_230_3;
         cargo_age_period:               128;
         cost_factor:                    17;
         purchase_running_cost_factor:   17;

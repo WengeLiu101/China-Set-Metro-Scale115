@@ -1,3 +1,10 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_d2223f3e_310_3, position_in_articulated_veh % 3) {
+    0: return 104;
+    1: return 103;
+    2: return 103;
+}
+
 //广州A2
 
 spriteset (spriteset_guangzhou_a2_purchase, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
@@ -11,10 +18,10 @@ spriteset (spriteset_guangzhou_a2_c_r, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_reversed_11 ("guangzhou_metro", "guangzhou-a2-c")
 }
 spriteset (spriteset_guangzhou_a2_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-a2-m")
+    template_std_c11 ("guangzhou_metro", "guangzhou-a2-m")
 }
 spriteset (spriteset_guangzhou_a2_mp_1, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-a2-mp-1")
+    template_std_c11 ("guangzhou_metro", "guangzhou-a2-mp-1")
 }
 spriteset (spriteset_guangzhou_a2_mp_2, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_reversed_11 ("guangzhou_metro", "guangzhou-a2-mp-2")
@@ -120,6 +127,7 @@ item (FEAT_TRAINS, guangzhou_a2) {
         can_attach_wagon:               AB;
         start_stop:                     mu3to12car;
         // Graphics
+        visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, ENABLE_WAGON_POWER);
         default:                        switch_guangzhou_a2_graphics_front;
         purchase:                       spriteset_guangzhou_a2_purchase;
         articulated_part:               switch_guangzhou_a2_articulated_part;
@@ -134,7 +142,7 @@ item (FEAT_TRAINS, guangzhou_a2) {
         purchase_power:                 return 4720; // HPI
         tractive_effort_coefficient:    return 0;
         purchase_tractive_effort_coefficient: return int(0.647*255);
-        purchase_cargo_capacity:        310/3;
+        purchase_cargo_capacity: switch_pcap_d2223f3e_310_3;
         cargo_age_period:               128;
         cost_factor:                    25;
         purchase_running_cost_factor:   25;

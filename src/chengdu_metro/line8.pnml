@@ -1,25 +1,32 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_8313d015_280_3, position_in_articulated_veh % 3) {
+    0: return 94;
+    1: return 93;
+    2: return 93;
+}
+
 //8号线
 //折叠列表
 
 
 spriteset (spriteset_chengdu8_original, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_purchase ("chengdu_metro", "chengdu8-cr")
+    template_purchase_c11 ("chengdu_metro", "chengdu8-cr")
 }
 // Vehicle
 spriteset (spriteset_chengdu8_c_front, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu8-cr")
+    template_std_c11 ("chengdu_metro", "chengdu8-cr")
 }
 spriteset (spriteset_chengdu8_p, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu8-pr")
+    template_std_c11 ("chengdu_metro", "chengdu8-pr")
 }
 spriteset (spriteset_chengdu8_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu8-m")
+    template_std_c11 ("chengdu_metro", "chengdu8-m")
 }
 spriteset (spriteset_chengdu8_pr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu8-p")
+    template_std_c11 ("chengdu_metro", "chengdu8-p")
 }
 spriteset (spriteset_chengdu8_cab, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("chengdu_metro", "chengdu8-c")
+    template_std_c11 ("chengdu_metro", "chengdu8-c")
 }
 switch (FEAT_TRAINS, SELF, switch_chengdu8_articulated_part, extra_callback_info1) {
     1..2: return chengdu8;
@@ -158,6 +165,7 @@ item (FEAT_TRAINS, chengdu8) {
         can_attach_wagon:               AB;
         start_stop:                     mu3to12car;
         // Graphics
+        visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, ENABLE_WAGON_POWER);
         default:                        switch_chengdu8_graphics_front;
         purchase:                       spriteset_chengdu8_original;
         articulated_part:               switch_chengdu8_articulated_part;
@@ -170,7 +178,7 @@ item (FEAT_TRAINS, chengdu8) {
         tractive_effort_coefficient:    return 0;
         purchase_tractive_effort_coefficient: return int(0.171*255);
         cargo_capacity:                 switch_chengdu8_capacity_front;
-        purchase_cargo_capacity:        280/3;
+        purchase_cargo_capacity: switch_pcap_8313d015_280_3;
         cargo_age_period:               128;
         cost_factor:                    25;
         purchase_running_cost_factor:   25;

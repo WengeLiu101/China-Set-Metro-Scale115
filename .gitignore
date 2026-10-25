@@ -1,7 +1,8 @@
+src.bak_livery/
+src.keep_split/
 .nmlcache/
 *.grf
-*.nml
-gfx/**/*.png
-lang/english.lng
-lang/simplified_chinese.lng
-
+stretch115.json
+metro.nml
+metro.temp
+lang/*.bak

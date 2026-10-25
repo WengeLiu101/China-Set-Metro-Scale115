@@ -1,3 +1,10 @@
+
+switch (FEAT_TRAINS, SELF, switch_pcap_86966a67_265_3, position_in_articulated_veh % 3) {
+    0: return 89;
+    1: return 88;
+    2: return 88;
+}
+
 //18号线
 //折叠列表
 
@@ -9,10 +16,10 @@ spriteset (spriteset_guangzhou_d1_c_front, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_standard ("guangzhou_metro", "guangzhou-d1-c")
 }
 spriteset (spriteset_guangzhou_d1_p, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-d1-mp-1")
+    template_std_c12 ("guangzhou_metro", "guangzhou-d1-mp-1")
 }
 spriteset (spriteset_guangzhou_d1_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-d1-m")
+    template_std_c12 ("guangzhou_metro", "guangzhou-d1-m")
 }
 spriteset (spriteset_guangzhou_d1_pr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_reversed ("guangzhou_metro", "guangzhou-d1-mp-2")
@@ -25,10 +32,10 @@ spriteset (spriteset_guangzhou_d2_c_front, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_standard ("guangzhou_metro", "guangzhou-d2-c")
 }
 spriteset (spriteset_guangzhou_d2_p, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-d2-mp-1")
+    template_std_c12 ("guangzhou_metro", "guangzhou-d2-mp-1")
 }
 spriteset (spriteset_guangzhou_d2_m, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
-    template_standard ("guangzhou_metro", "guangzhou-d2-m")
+    template_std_c12 ("guangzhou_metro", "guangzhou-d2-m")
 }
 spriteset (spriteset_guangzhou_d2_pr, ZOOM_LEVEL_IN_4X, BIT_DEPTH_32BPP) {
     template_reversed ("guangzhou_metro", "guangzhou-d2-mp-2")
@@ -41,11 +48,13 @@ switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_articulated_part, extra_callback_
     return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 //改装
-switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_subtype, cargo_subtype) {
+switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_subtype_livery, cargo_subtype) {
     0: return string(STR_D1_BLUE);
     1: return string(STR_D2_ORANGE);
     return CB_RESULT_NO_TEXT;
+
 }
+switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_subtype, cargo_subtype) { switch_guangzhou_d1_subtype_livery; }
 switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_front, cargo_subtype) {
    0: spriteset_guangzhou_d1_c_front;
    1: spriteset_guangzhou_d2_c_front;
@@ -94,8 +103,8 @@ switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_graphics,position_in_articulated_
 
 //载客
 switch (FEAT_TRAINS, SELF, switch_guangzhou_d1_capacity_front, position_in_articulated_veh % 3) {
-    1: return 195;
-    return 0;
+    1: return 193;
+    return 1;
 }
 
 
@@ -171,6 +180,7 @@ item (FEAT_TRAINS, guangzhou_d1) {
         can_attach_wagon:               sw_business;
         start_stop:                     mu3to12car;
         // Graphics
+        visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, ENABLE_WAGON_POWER);
         default:                        switch_guangzhou_d1_graphics_front;
         purchase:                       spriteset_guangzhou_d1_original;
         articulated_part:               switch_guangzhou_d1_articulated_part;
@@ -183,7 +193,7 @@ item (FEAT_TRAINS, guangzhou_d1) {
         speed:                          160;
         tractive_effort_coefficient:    return 0;
         purchase_tractive_effort_coefficient: return int(0.191*255);
-        purchase_cargo_capacity:        265/3;
+        purchase_cargo_capacity: switch_pcap_86966a67_265_3;
         cargo_capacity:                 switch_guangzhou_d1_capacity_front;
         cargo_age_period:               128;
         cost_factor:                    36;
